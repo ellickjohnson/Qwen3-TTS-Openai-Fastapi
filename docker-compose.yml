@@ -10,7 +10,6 @@ services:
       - "8880:8880"
     environment:
       - CUDA_VISIBLE_DEVICES=0
-      # Use CustomVoice model to support preset voices like Vivian
       - TTS_MODEL_NAME=Qwen/Qwen3-TTS-12Hz-1.7B-CustomVoice
     volumes:
       - qwen3-models:/app/models
@@ -25,3 +24,4 @@ services:
 
 volumes:
   qwen3-models:
+EOF
