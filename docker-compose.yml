@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  qwen3-tts-api:
+    image: mosstnslv/qwen-tts-service:0.0.1
+    container_name: qwen3-tts-api
+    runtime: nvidia
+    ports:
+      - "8188:8188"
+    environment:
+      - PYTHONUNBUFFERED=1
+      - QWEN3_TTS_ATTN_IMPLEMENTATION=flash_attention_2
+      - CUDA_VISIBLE_DEVICES=0
+      - MODEL_PATH=Qwen/Qwen3-TTS-12Hz-1.7B-CustomVoice
+      - HF_HOME=/app/models
+      - SAMPLING_RATE=24000
+    volumes:
+      - qwen3-models:/app/models
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    restart: unless-stopped
+
+volumes:
+  qwen3-models:
