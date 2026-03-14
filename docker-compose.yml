@@ -2,14 +2,13 @@ version: '3.8'
 
 services:
   qwen3-tts-api:
-    image: mosstnslv/qwen-tts-service:0.0.1
+    image: spaceinvaderone/qwen3-tts:latest
     container_name: qwen3-tts-api
     runtime: nvidia
     ports:
-      - "8188:8188"
+      - "7860:7860"
     environment:
       - CUDA_VISIBLE_DEVICES=0
-      - HF_HOME=/app/models
     volumes:
       - qwen3-models:/app/models
     deploy:
